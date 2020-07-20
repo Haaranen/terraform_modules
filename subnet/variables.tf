@@ -15,3 +15,10 @@ variable "location" {
   description = "location of the resource"
 
 }
+
+variable "az_subnet_depends_on" {
+  #the value is irrelevant; we only care about
+  # dependencies for this one.
+  type = any
+
+}
