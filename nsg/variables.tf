@@ -8,7 +8,7 @@ variable "virtual_network_name" {
     description = "(Required) virtual network name"
 }
 
-variable "subnets" {
+variable "netowrk_security_groups" {
     description = "(Required) map structure of the rules to be created"
 }
 

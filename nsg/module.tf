@@ -1,12 +1,12 @@
 ﻿resource "azurerm_network_security_group" "nsg_object" {
 
-    for_each            = var.subnets
-    name                = each.value.nsg_name
+    for_each            = var.netowrk_security_groups
+    name                = each.value.name
     resource_group_name = var.resource_group_name
     location            = var.location
 
     dynamic "security_rule" {
-        for_each = lookup(each.value, "nsg", [])
+        for_each = lookup(each.value, "rules", [])
         content {
             name                                       = lookup(security_rule.value, "name", null )
             priority                                   = lookup(security_rule.value, "priority", null )
