@@ -8,6 +8,10 @@ variable "location" {
   description = "(Required) Azure location"
 }
 
+variable "tenant_id" {
+  type = string
+  description = "(Required) Azure key vault azure ad tenant id"
+}
 variable "name" {
   type = string
   description = "(Required) Azure key vault name"
@@ -28,24 +32,13 @@ variable "soft_delete" {
 variable "purge_protection" {
   type = bool
   description = "(Optional) Azure key vault purge protection enabled"
+  default = true
 }
 
 variable "sku" {
   type = string
   description = "(Optional) Azure Key vault sku name"
   default = "standard"
-}
-
-variable "access_policy" {
-  type = map(object({
-    tenant_id = string
-    object_id = string
-    key_permissions = list(string)
-    secret_permissions = list(string)
-    storage_permissions = list(string)
-  }))
-  description = "(Optional) Azure key vaul access policy"
-  default = []
 }
 
 variable "network_acls" {
@@ -56,5 +49,12 @@ variable "network_acls" {
     virtual_network_subnet_ids = list(string)
   }))
   description = "(Optional) Azure key vault network access control list"
-  default = []
+  default = {
+    map0 = {
+      default_action = "Allow"
+      bypass = "AzureServices"
+      ip_rules = []
+      virtual_network_subnet_ids = []
+    }
+  }
 }
